@@ -46,4 +46,5 @@ log/*
 # Test files
 2GAJMATRICULADES.csv
 single2GAJMATRICULADES.csv
-result.csv
+result_per_mp.txt
+result_per_student.csv
