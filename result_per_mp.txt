@@ -1,0 +1,60 @@
+MP01 - Comunicació empresarial i atenció al client:
+	• Anrrango Varela, Marlon Alexander: UF2, UF3
+	• Guaman Tandazo, Veronica Mishel: UF1, UF2
+	• Pla Gómez, Gerard: UF2, UF4
+
+MP02 - Operacions administratives de compravenda:
+	• Abad Ortiz, Emma: UF1
+	• Giménez Santorromán, Núria: UF2
+	• Rosario Sena, Tais Abigail: UF1
+	• Talebi El Hassani, Chaimae: UF1, UF2, UF3
+
+MP03 - Operacions administratives de recursos humans:
+	• Batlle Payán, Irina: UF2
+	• Carabalí Véliz, Jordi Pierre: UF2
+	• El Mailoudi Bounouar, Soraya: UF2
+	• Gallego Damota, Rocio: UF2
+	• Giménez Santorromán, Núria: UF2
+	• Ruiz Guinart, Àlex: UF2
+	• Talebi El Hassani, Chaimae: UF2
+	• Vona, Giorgia Rosanna: UF2
+
+MP05 - Tècnica comptable:
+	• Abad Ortiz, Emma: UF2, UF3
+	• Anrrango Varela, Marlon Alexander: UF3
+	• Batlle Payán, Irina: UF1, UF2, UF3
+	• Carabalí Véliz, Jordi Pierre: UF1, UF2, UF3
+	• El Asri El Outmani, Zakia: UF2, UF3
+	• El Mailoudi Bounouar, Soraya: UF2, UF3
+	• Giménez Santorromán, Núria: UF1, UF2, UF3
+	• López Sevilla, Lourdes: UF3
+	• Pina Touzon, Alexandra: UF3
+	• Pla Gómez, Gerard: UF2, UF3
+	• Rosario Sena, Tais Abigail: UF2, UF3
+	• Ruiz Guinart, Àlex: UF3
+	• Saban Cortés, Nadi: UF3
+	• Sánchez Cano, Raquel: UF2, UF3
+	• Talebi El Hassani, Chaimae: UF1, UF2, UF3
+	• Vona, Giorgia Rosanna: UF1, UF2, UF3
+
+MP07 - Tractament informàtic de la informació:
+	• Anrrango Varela, Marlon Alexander: UF2
+	• Caballero Iturralde, Lisette Jacqueline: UF2
+	• Gallego Damota, Rocio: UF1, UF2, UF3
+	• Giménez Santorromán, Núria: UF2, UF3
+	• Moras Osuna, Daniel: UF2
+	• Pla Gómez, Gerard: UF1, UF2, UF3
+
+MP10 - Empresa i Administració:
+	• Anrrango Varela, Marlon Alexander: UF3
+	• López Sevilla, Lourdes: UF3, UF4
+	• Talebi El Hassani, Chaimae: UF4
+
+MP14 - Organització i estructura de l’àmbit jurídic i judicial:
+	• Carabalí Véliz, Jordi Pierre: UF4
+	• Gil Parrilla, Montserrat: UF1, UF2, UF3, UF4
+	• Hernandez Peixoto, Maria de las Mercedes: UF1, UF2, UF3, UF4
+	• Moras Osuna, Daniel: UF1, UF2, UF3, UF4
+	• Ruiz Guinart, Àlex: UF4
+	• Soto Fernandez, Maria Tiscar: UF1, UF2, UF3, UF4
+
