@@ -3,10 +3,11 @@ from sys import argv
 import copy
 
 # Set to True to include just the pending files from the previous course
-CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_FILE_PER_MP = True
+CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_TXT_FILES = True
 
-RESULT_FILE_PER_STUDENT = 'result_per_student.csv'
-RESULT_FILE_PER_MP = 'result_per_mp.txt'
+RESULT_CSV_FILE_PER_STUDENT = 'result_per_student.csv'
+RESULT_TXT_FILE_PER_MP = 'result_per_mp.txt'
+RESULT_TXT_FILE_PER_STUDENT = 'result_per_student.txt'
 
 CODE_DICT = {"014":"MP01",
              "015":"MP02",
@@ -100,17 +101,17 @@ def add_to_student_dict(student_name, student_uf_list):
 
 # Creates a CSV file with every student as a row and every GAJ UF as columns.
 # Enrolled UF display an "x", otherwise they appear empty.   
-def generate_file_per_student():
-    with open(RESULT_FILE_PER_STUDENT, 'w', encoding='utf-8') as result_file:
+def generate_csv_file_per_student():
+    with open(RESULT_CSV_FILE_PER_STUDENT, 'w', encoding='utf-8') as result_file:
         file_writer = csv.writer(result_file)
-        file_writer.writerow(generate_file_header_list())
+        file_writer.writerow(generate_csv_file_header_list())
         for student_name in STUDENTS_DICT:
             student_mp_dict = STUDENTS_DICT[student_name]
             file_writer.writerow(generate_student_uf_list(student_name, student_mp_dict))
 
 
 # Creates the header for the CSV result file
-def generate_file_header_list():
+def generate_csv_file_header_list():
     header_list = ["ESTUDIANT"]
     for mp in MP_DICT:
         for uf in MP_DICT[mp]:
@@ -164,21 +165,21 @@ def get_list_from_dict_of_uf(student_mp_uf_dict):
     return uf_list
 
 
-# Creates the TXT result file
-def generate_file_per_mp():
-    if CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_FILE_PER_MP:
-        clean_gaj1_mp_and_uf()
-    with open(RESULT_FILE_PER_MP, "w") as result_file:
+# Creates the TXT result file per MP
+def generate_txt_file_per_mp():
+    with open(RESULT_TXT_FILE_PER_MP, "w") as result_file:
         for mp in MP_WITH_ENROLLED_STUDENTS_DICT:
-            result_file.write(mp + " - " + MP_NAME_DICT[mp] + ':'+'\n')
-            for student in MP_WITH_ENROLLED_STUDENTS_DICT[mp]:
-                result_file.write('\t• ' + student + '\n')
-            result_file.write('\n')
+            if MP_WITH_ENROLLED_STUDENTS_DICT[mp] is not None:
+                result_file.write(mp + " - " + MP_NAME_DICT[mp] + ':'+'\n')
+                for student in MP_WITH_ENROLLED_STUDENTS_DICT[mp]:
+                    result_file.write('\t• ' + student + '\n')
+                result_file.write('\n')
 
 
 # Removes the GAJ2 enrolled UF from the TXT file in case
-# CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_FILE_PER_MP is set to True
+# CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_TXT_FILES is set to True
 def clean_gaj1_mp_and_uf():
+    # Clean file per mp
     for mp in GAJ2_MP_EXCEPT_MP07:
         del MP_WITH_ENROLLED_STUDENTS_DICT[mp]
 
@@ -194,11 +195,57 @@ def clean_gaj1_mp_and_uf():
         MP_WITH_ENROLLED_STUDENTS_DICT["MP07"] = new_mp07_data
     MP_WITH_ENROLLED_STUDENTS_DICT["MP07"] = [student for student in MP_WITH_ENROLLED_STUDENTS_DICT["MP07"] if "UF" in student]
 
+    # Clean files per student
+    for student_name in STUDENTS_DICT:
+        for mp in GAJ2_MP_EXCEPT_MP07:
+            del STUDENTS_DICT[student_name][mp]
+    
+    for student_name in STUDENTS_DICT:
+        gaj2_mp07_integer_list = transform_uf_to_dict_integer_keys(GAJ2_MP07_UF)
+        for uf in gaj2_mp07_integer_list:
+            if uf in STUDENTS_DICT[student_name]['MP07']:
+                del STUDENTS_DICT[student_name]['MP07'][uf]
+
+
+# Transforms a list of UF into a list of integers in accordance to mp dicts keys
+def transform_uf_to_dict_integer_keys(uf_list):
+    integer_list = []
+    for uf in uf_list:
+        integer = ''.join(char for char in uf if char.isdigit())
+        integer_list.append(int(integer))
+
+    return integer_list
+
+
+# Creates the TXT result file per student
+def generate_txt_file_per_student():
+    with open(RESULT_TXT_FILE_PER_STUDENT, 'w', encoding='utf-8') as result_file:
+        for student_name in STUDENTS_DICT:
+            mp_dict = STUDENTS_DICT[student_name].copy()
+            for mp in mp_dict:
+                uf_dict = mp_dict[mp].copy()
+                enrolled_uf = any(uf_dict.values())
+                if enrolled_uf is True:
+                    result_file.write(student_name +':' + '\n')
+                    break
+            for mp in mp_dict:
+                uf_dict = mp_dict[mp].copy()
+                check = any(uf_dict.values())
+                if check is True:
+                    student_mp_uf_dict = mp_dict[mp]
+                    uf_list = get_list_from_dict_of_uf(student_mp_uf_dict)
+                    result_file.write('\t• ' + mp + ': ' + ", ".join(uf_list) + '\n')
+            if enrolled_uf:
+                result_file.write('\n')
+
 
 if __name__ == "__main__":
     filename = argv[1]
     read_file(filename)
-    generate_file_per_student()
+    generate_csv_file_per_student()
     fill_mp_with_enrolled_students_dict()
-    generate_file_per_mp()
+    if CLEAN_GAJ1_MP_AND_UF_FROM_RESULT_TXT_FILES:
+        clean_gaj1_mp_and_uf()
+    generate_txt_file_per_mp()
+    generate_txt_file_per_student()
     
